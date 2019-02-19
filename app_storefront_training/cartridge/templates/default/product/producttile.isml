@@ -249,7 +249,7 @@
                 </isloop>
 
                 <isif condition="${discountPercentage !== 0}" >
-                    <h2 class="product-tile__h2--bestdeal" style="color: red;">${Resource.msgf("product.bestdeal", "training", null, discountPercentage)}</h2>
+                    <h2 class="product-tile__h2--bestdeal">${Resource.msgf("product.bestdeal", "training", null, discountPercentage)}</h2>
                 <iselse/>
                 
                 </isif>
