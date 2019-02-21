@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<form >
+    <field formid="firstname" label="forms.newsletter.subscribe.firstname.label" type="string" mandatory="true" binding="custom.firstName" max-length="50"/>
+    <field formid="lastname" label="forms.newsletter.subscribe.lastname.label" type="string" mandatory="true" binding="custom.lastName" max-length="50"/>
+    <field formid="email" label="forms.newsletter.subscribe.email.label" type="string" mandatory="true" 
+        regexp="^[\w-\.]{1,}\@([\da-zA-Z-]{1,}\.){1,}[\da-zA-Z-]{2,6}$" 
+        parse-error="forms.newsletter.subscribe.email.parse-error" 
+        value-error="forms.newsletter.subscribe.email.value-error" 
+        binding="custom.email" 
+        max-length="50"/>  
+    <action formid="subscribe" valid-form="true"/>
+</form>
