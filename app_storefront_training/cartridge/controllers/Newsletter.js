@@ -4,12 +4,10 @@
 
 const ISML = require('dw/template/ISML');
 const guard = require('app_storefront_controllers/cartridge/scripts/guard');
+const newsletterForm = session.forms.newsletter;
 
 function start() {
-  
-    var newsletterForm = session.forms.newsletter;
     newsletterForm.clearFormElement();
-
     ISML.renderTemplate('newsletter/newslettersubscribe', {
         ContinueURL : dw.web.URLUtils.https('Newsletter-HandleForm')
     });
@@ -28,16 +26,14 @@ function handleForm() {
                 const Newsletter = require("~/cartridge/scripts/models/Newsletter");
                 let newsletter = Newsletter.CreateNewsLetterObject(newsletterForm);
                 newsletter = Newsletter.AssignCouponCode(newsletter);
+                Newsletter.sendNewsLetterMail(newsletter);
             })
             ISML.renderTemplate("newsletter/newslettersuccess.isml");
         } catch (e) {
-            ISML.renderTemplate("newsletter/newslettersuccess.isml");
+            ISML.renderTemplate("newsletter/newslettererror.isml", {
+                error: e
+            });
         }
-    }
-    
-    if (TriggeredAction != null && TriggeredAction.formId == 'subscribe') {    
-   		ISML.renderTemplate('newsletter/newslettersuccess');
-    	  
     } else {
         ISML.renderTemplate('newsletter/newslettersignup', {
             ContinueURL : dw.web.URLUtils.https('Newsletter-HandleForm')

@@ -3,4 +3,5 @@
     ${Resource.msgf("newsletter.error.description", "locale", null, pdict.CurrentForms.newsletter.email.value, URLUtils.url('Newsletter-Start'))}
     Maybe the email ${pdict.CurrentForms.newsletter.email.value} already exists?
     Back to <a href="${URLUtils.url('Newsletter-Start')}">Newsletter Subscription</a>.
+    ${pdict.error}
 </isdecorate>
