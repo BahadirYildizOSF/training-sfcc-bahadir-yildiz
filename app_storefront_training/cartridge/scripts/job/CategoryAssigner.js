@@ -12,37 +12,43 @@ exports.execute = function (params) {
     const Transaction = require('dw/system/Transaction');
     const CatalogMgr = require('dw/catalog/CatalogMgr');
     const catalog = CatalogMgr.getCatalog("storefront-catalog-en");
-    let allProducts = require('dw/catalog/ProductMgr').queryProductsInCatalog(catalog).asList();
-    let filteredProducts = {};
-    
+    const System = require('dw/system/System');
+    const Pipelet = require("dw/system/Pipelet");
+    const psm = new dw.catalog.ProductSearchModel();
+
+    psm.addRefinementValues("brand", params.brand);
+    psm.search();
+    const searchResults = psm.getProductSearchHits();
+    var filteredProducts = {};
+
     Transaction.wrap(function () {
-        const file = new File(File.IMPEX+File.SEPARATOR+"src"+File.SEPARATOR+"catalog"+File.SEPARATOR+"assigned_products.xml");
+        const file = new File(File.IMPEX + File.SEPARATOR + "src" + File.SEPARATOR + "assigned_products.xml");
         const fileWriter = new FileWriter(file, "UTF-8");
         fileWriter.setLineSeparator('\r\n');
         const xsw = new XMLStreamWriter(fileWriter);
-        
+
         xsw.writeStartDocument();
+        xsw.writeStartElement("catalog");
+        xsw.writeAttribute("catalog-id", "storefront-catalog-en");
+        xsw.writeAttribute("xmlns", "http://www.demandware.com/xml/impex/catalog/2006-10-31")
 
-        for (let index = 0; index < allProducts.length; index++) {
-            let product = allProducts.get(index);
-            product = product.constructor.name == "dw.catalog.Variant" ? product.getMasterProduct() : product;
-
-            if(product.getID() in filteredProducts){
+        while (searchResults.hasNext()) {
+            var product = searchResults.next().getProduct();
+            if (product.getID() in filteredProducts) {
                 continue;
             } else {
-                if (product.brand === params.brand) {
-                    xsw.writeStartElement("category-assignment");
-                    xsw.writeAttribute("category-id", params.newCategory);
-                    xsw.writeAttribute("product-id", product.getID());
-                        xsw.writeStartElement("primary-flag");
-                        xsw.writeCharacters("true");
-                        xsw.writeEndElement();
+                xsw.writeStartElement("category-assignment");
+                xsw.writeAttribute("category-id", params.newCategory);
+                xsw.writeAttribute("product-id", product.getID());
+                    xsw.writeStartElement("primary-flag");
+                    xsw.writeCharacters("true");
                     xsw.writeEndElement();
-                }
+                xsw.writeEndElement();
                 filteredProducts[product.getID()] = product;
             }
         }
 
+        xsw.writeEndElement();
         xsw.writeEndDocument();
         xsw.close();
         fileWriter.close();
