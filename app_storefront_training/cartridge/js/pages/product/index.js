@@ -1,16 +1,16 @@
 'use strict';
 
-var dialog = require('../../dialog'),
-    productStoreInventory = require('../../storeinventory/product'),
-    tooltip = require('../../tooltip'),
-    util = require('../../util'),
-    addToCart = require('./addToCart'),
-    availability = require('./availability'),
-    image = require('./image'),
-    productNav = require('./productNav'),
-    productSet = require('./productSet'),
-    recommendations = require('./recommendations'),
-    variant = require('./variant');
+var dialog = require('app_storefront_core/cartridge/js/dialog'),
+    productStoreInventory = require('app_storefront_core/cartridge/js/storeinventory/product'),
+    tooltip = require('app_storefront_core/cartridge/js/tooltip'),
+    util = require('app_storefront_core/cartridge/js/util'),
+    addToCart = require('app_storefront_core/cartridge/js/pages/product/addToCart'),
+    availability = require('app_storefront_core/cartridge/js/pages/product/availability'),
+    image = require('app_storefront_core/cartridge/js/pages/product/image'),
+    productNav = require('app_storefront_core/cartridge/js/pages/product/productNav'),
+    productSet = require('app_storefront_core/cartridge/js/pages/product/productSet'),
+    recommendations = require('app_storefront_core/cartridge/js/pages/product/recommendations'),
+    variant = require('app_storefront_core/cartridge/js/pages/product/variant');
 
 /**
  * @description Initialize product detail page with reviews, recommendation and product navigation.
@@ -38,7 +38,7 @@ function initializeEvents() {
 
     // Add to Wishlist and Add to Gift Registry links behaviors
     $pdpMain.on('click', '[data-action="wishlist"], [data-action="gift-registry"]', function (e) {
-        if (User.isAuthenticated) {
+        if (customer.isAuthenticated()) {
             var data = util.getQueryStringParams($('.pdpForm').serialize());
             if (data.cartAction) {
                 delete data.cartAction;
@@ -46,14 +46,9 @@ function initializeEvents() {
             var url = util.appendParamsToUrl(this.href, data);
             this.setAttribute('href', url);
         } else {
-            e.stopPropagation();
+            e.stopPropagation()
             e.preventDefault();
-            dialog.open({
-                url: Urls.areyouhuman,
-                options: {
-                    closeOnEscape: true,
-                }
-            });
+            dialog.open("Are you even a human?");
         }
     });
 
