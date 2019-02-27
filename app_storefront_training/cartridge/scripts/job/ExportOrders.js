@@ -23,6 +23,7 @@ exports.execute = function (params) {
 
         while (searchResults.hasNext()) {
             var order = searchResults.next().getCurrentOrder();
+            var orderDate = order.getCreationDate();
             var productLineItems = order.getAllProductLineItems().iterator();
             var paymentInstruments = order.getPaymentInstruments().iterator();
 
@@ -31,24 +32,34 @@ exports.execute = function (params) {
              */
             xsw.writeStartElement("order");
             xsw.writeAttribute("order-no", order.getOrderNo());
-                xsw.writeStartElement("order-date");
-                    xsw.writeCharacters(order.getCreationDate().toString());
-                xsw.writeEndElement();
+                if(orderDate !== null){
+                    xsw.writeStartElement("order-date");
+                        xsw.writeCharacters(order.getCreationDate().toString());
+                    xsw.writeEndElement();
+                }
                 xsw.writeStartElement("customer");
-                    xsw.writeStartElement("customer-name");
-                        xsw.writeCharacters(order.getCustomerName());
-                    xsw.writeEndElement();
-                    xsw.writeStartElement("customer-no");
-                        xsw.writeCharacters(order.getCustomerNo());
-                    xsw.writeEndElement();
-                    xsw.writeStartElement("customer-email");
-                        xsw.writeCharacters(order.getCustomerEmail());
-                    xsw.writeEndElement();
+                    if(order.getCustomerName() !== null){
+                        xsw.writeStartElement("customer-name");
+                            xsw.writeCharacters(order.getCustomerName());
+                        xsw.writeEndElement();
+                    }
+                    if(order.getCustomerNo() !== null){
+                        xsw.writeStartElement("customer-no");
+                            xsw.writeCharacters(order.getCustomerNo());
+                        xsw.writeEndElement();
+                    }
+                    if(order.getCustomerEmail() !== null){
+                        xsw.writeStartElement("customer-email");
+                            xsw.writeCharacters(order.getCustomerEmail());
+                        xsw.writeEndElement();
+                    }
                 xsw.writeEndElement();
                 xsw.writeStartElement("adjusted-merchandize-total");
-                    xsw.writeStartElement("gross-price");
-                        xsw.writeCharacters(order.getAdjustedMerchandizeTotalGrossPrice());
-                    xsw.writeEndElement();
+                    if(order.getAdjustedMerchandizeTotalGrossPrice() !== null){                 
+                        xsw.writeStartElement("gross-price");
+                            xsw.writeCharacters(order.getAdjustedMerchandizeTotalGrossPrice());
+                        xsw.writeEndElement();   
+                    }
                 xsw.writeEndElement();
                 xsw.writeStartElement("product-lineitems");
                     while(productLineItems.hasNext()){
