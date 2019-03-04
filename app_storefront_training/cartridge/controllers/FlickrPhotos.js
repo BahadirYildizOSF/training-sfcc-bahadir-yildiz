@@ -1,8 +1,7 @@
 var ISML = require('dw/template/ISML');
 var guard = require('app_storefront_controllers/cartridge/scripts/guard');
 var HTTPClient = require('dw/net/HTTPClient');
-var Response = require('app_storefront_controllers/cartridge/scripts/util/Response');
-
+var Resource = require('dw/web/Resource');
 function start() {
     var format = 'json',
         preferences = dw.system.Site.getCurrent().getPreferences(),
@@ -17,6 +16,10 @@ function start() {
         var data = eval(client.text);
         ISML.renderTemplate("flickr/showphotos", {
             items: data.items
+        })
+    } else {
+        ISML.renderTemplate("flickr/showphotos", {
+            items: null
         })
     }
 }
