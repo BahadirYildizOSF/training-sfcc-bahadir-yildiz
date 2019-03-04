@@ -27,7 +27,7 @@ var addDirectlyToCard = function (event) {
                     window.location.href = response.redirectTo;
                 } else if ( response.status === "PRODUCT_NOT_FOUND" || 
                             response.status === "PRODUCT_IS_MASTER" || 
-                            response.status === "PRODUCT_NOT_IS_STOCK") {
+                            response.status === "PRODUCT_NOT_IN_STOCK") {
                     dialog.open({
                         html: `<h2>${response.statusText}</h2>`
                     })
