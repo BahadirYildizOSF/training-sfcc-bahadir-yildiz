@@ -1,0 +1,18 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isdecorate template="account/pt_account">
+    <isinclude url="util/modules" />
+    <div class="search-result-content">
+        <div class="search-result-items tiles-container clearfix hide-compare">
+            <isloop items="${pdict.items}" var="item">
+                <div class="grid-tile">
+                    <div class="product-tile">
+                        <div class="product-image" style="height: 250px;">
+                            <img class="" src="${item.media.m}" alt="${item.title}" />
+                        </div>
+                    </div>
+                </div>
+            </isloop>
+        </div>
+    </div>
+
+</isdecorate>

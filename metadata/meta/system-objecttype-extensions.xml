@@ -1386,6 +1386,9 @@
             <attribute-definition attribute-id="customerEmail">
                 <min-length>0</min-length>
             </attribute-definition>
+            <attribute-definition attribute-id="customerLocaleID">
+                <min-length>0</min-length>
+            </attribute-definition>
             <attribute-definition attribute-id="customerName">
                 <min-length>0</min-length>
             </attribute-definition>
