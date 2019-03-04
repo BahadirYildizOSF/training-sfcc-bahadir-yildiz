@@ -1,6 +1,6 @@
 <isinclude template="util/modules" />
 <div class="container">
-    <form action="${URLUtils.httpContinue()}" method="get" name="${pdict.CurrentForms.fastSearch.htmlName}">
+    <form action="${URLUtils.httpContinue()}" method="get" name="${pdict.CurrentForms.fastSearch.htmlName}" id="${pdict.CurrentForms.fastSearch.htmlName}">
         <fieldset>
             <div class="formfield">
                 <isinputfield formfield="${pdict.CurrentForms.fastSearch.productID}" type="input" />

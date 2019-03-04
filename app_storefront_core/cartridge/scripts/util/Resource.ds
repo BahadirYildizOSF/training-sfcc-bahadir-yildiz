@@ -203,7 +203,8 @@ ResourceHelper.getUrls = function(pageContext) {
         consentTracking             : URLUtils.url('Page-Show', 'cid', 'consent_tracking_hint').toString(),
         consentTrackingSetSession   : URLUtils.url('Account-ConsentTracking').toString(),
         rateLimiterReset            : URLUtils.url('RateLimiter-HideCaptcha').toString(),
-        csrffailed                  : URLUtils.url('CSRF-Failed').toString()
+        csrffailed                  : URLUtils.url('CSRF-Failed').toString(),
+        checkProductExists          : URLUtils.url('FastSearch-HandleForm').toString()
     };
     return urls;
 }

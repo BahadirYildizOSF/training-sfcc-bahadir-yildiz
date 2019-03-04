@@ -1,4 +1,7 @@
 'use strict';
+
+var addDirectlyToCart = require("../addDirectlyToCard");
+
 exports.init = function () {
     $('#homepage-slider')
         // responsive slides
@@ -54,4 +57,6 @@ exports.init = function () {
         .jcarouselControl({
             target: '+=1'
         });
+    
+    $(document.dwfrm_fastSearch).on("submit", addDirectlyToCart);
 };
