@@ -1,0 +1,27 @@
+<iscontent type="text/html" charset="UTF-8" compact="true" />
+<isdecorate template="account/pt_account">
+    <isinclude template="util/modules" />
+
+    <isif condition="${pdict.data != null}">
+        <ul>
+            <li>
+                <strong>ID:</strong> ${pdict.data.id}
+            </li>
+            <li>
+                <strong>Name:</strong> ${pdict.data.name}
+            </li>
+            <li>
+                <strong>Email:</strong> ${pdict.data.email}
+            </li>
+            <li>
+                <strong>Birthday:</strong> ${pdict.data.birthday}
+            </li>
+            <li>
+                <strong>Profile Picture:</strong>
+                <img src="${pdict.data.picture.data.url}" alt="${pdict.data.name}" />
+            </li>
+        </ul>
+    <iselse/>
+        <a href="${pdict.loginLink}">Click here to Login</a>
+    </isif>
+</isdecorate>
