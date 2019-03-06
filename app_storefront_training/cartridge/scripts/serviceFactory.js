@@ -10,9 +10,8 @@ function get(serviceID, serviceCallback) {
 	var service;
     //If the service was not configured and callback was sent
     if (serviceCallback) {
-    		service = dw.svc.LocalServiceRegistry.createService(serviceID, serviceCallback);
+        service = dw.svc.LocalServiceRegistry.createService(serviceID, serviceCallback);
     }
-
     return service;
 };
 
