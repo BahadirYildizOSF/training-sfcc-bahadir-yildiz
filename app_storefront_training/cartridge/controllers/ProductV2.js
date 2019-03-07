@@ -15,15 +15,16 @@ const guard = require('app_storefront_controllers/cartridge/scripts/guard');
 
 const ProductMgr = require('dw/catalog/ProductMgr');
 const ProductSearchModel = require('dw/catalog/ProductSearchModel');
-const PagingModel = require('dw/web/PagingModel');
+var CatalogMgr = require('dw/catalog/CatalogMgr');
 
 function show(){
     let product = ProductMgr.getProduct(params.pid.stringValue);
     let primaryCategory = product.getPrimaryCategory();
     let psm = new ProductSearchModel();
     psm.setCategoryID(primaryCategory.getID());
+    psm.setSortingRule(CatalogMgr.getSortingRule("price-low-to-high"));
     psm.search();
-    let searchHits = psm.getProductSearchHits();
+    let searchHits = psm.getProducts();
 
     ISML.renderTemplate("productv2", {
         Product: product,

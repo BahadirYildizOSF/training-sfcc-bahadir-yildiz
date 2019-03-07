@@ -18,7 +18,7 @@
         <div class="search-result-items tiles-container clearfix hide-compare">
             <isloop items="${pdict.searchHits}" var="searchHit" begin="1" end="4">
                 <li class="grid-tile">
-                    <isproducttile product="${searchHit.product}" showswatches="${true}" showpricing="${true}"
+                    <isproducttile product="${searchHit}" showswatches="${true}" showpricing="${true}"
                         showpromotion="${true}" showrating="${true}" cache="${false}" />
                 </li>
             </isloop>
