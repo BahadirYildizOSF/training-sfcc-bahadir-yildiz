@@ -1,5 +1,4 @@
 var ISML = require('dw/template/ISML');
-var app = require('app_storefront_controllers/cartridge/scripts/app');
 var guard = require('app_storefront_controllers/cartridge/scripts/guard');
 var FacebookHelper = require('app_storefront_training/cartridge/scripts/FacebookHelper');
 var URLUtils = require('dw/web/URLUtils');

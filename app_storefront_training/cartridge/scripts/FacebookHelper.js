@@ -62,9 +62,3 @@ module.exports = {
             .join('&');
     },
 }
-
-// https://www.facebook.com/v3.2/dialog/oauth/?app_id=440466183357411&redirect_uri=https%3A%2F%2Fosfglobal02-alliance-prtnr-eu03-dw.demandware.net%2Fon%2Fdemandware.store%2FSites-SiteGenesis-Site%2Fdefault%2FShowFacebookInfo-LoggedIn&state=
-
-// https://www.facebook.com/v3.2/dialog/oauth/?app_id=f9d2880664e0a16e301d220780c8922a&redirect_uri=https%3A%2F%2Fosfglobal02-alliance-prtnr-eu03-dw.demandware.net%2Fon%2Fdemandware.store%2FSites-SiteGenesis-Site%2Fdefault%2FShowFacebookInfo-LoggedIn
-
-// https://osfglobal02-alliance-prtnr-eu03-dw.demandware.net/on/demandware.store/Sites-SiteGenesis-Site/default/ShowFacebookInfo-LoggedIn?code=AQCAxgppyMHv1NWTUhen6hLwOrugdnVJ8kMJJevDBDSfI334pATN_N_N2L4agzML52kALus4mKhPPIfrhzkJoOpvVL_hjBpcG_mAq3JieGSe6QTeJdUmDxRZiImLh8SMAfs16C5y7GVMsw5ATDQH9Hjj5TKWldFP8Cc7_AuHUHlyw0_5D6-aBYBQE5kDyPeeJGpXNqETuXUodJmw5OEZ_ZHi40hxd4TznPA3NsPc3SFVwJyPzB0nfWbzOZKmLhRrOqrDosNtpG9AnRD8zCl0fM85W8c480aTi8b5ICvs5-wIIWsqS_Z-DcWI0nf1kt3Hjz8&state=%22%7Bkemange%3Dkako%2Csugarke%3Dmagekako%7D%22#_=_
