@@ -847,7 +847,13 @@
                         </isif>
                     </div>
 
-                    <isif condition="${lineItem.getAdjustedPrice().value >= 200}" >
+                    <isif condition="${pdict.Basket.totalGrossPrice.available}">
+                        <isset name="orderTotalValue" value="${pdict.Basket.totalGrossPrice}" scope="page"/>
+                    <iselse/>
+                        <isset name="orderTotalValue" value="${pdict.Basket.getAdjustedMerchandizeTotalPrice(true).add(pdict.Basket.giftCertificateTotalPrice)}" scope="page"/>
+                    </isif>
+
+                    <isif condition="${orderTotalValue >= 200}" >
                         <h2>${Resource.msg('cart.bigexpensealert', 'training', null)}</h2>
                     </isif>
                 </div>
