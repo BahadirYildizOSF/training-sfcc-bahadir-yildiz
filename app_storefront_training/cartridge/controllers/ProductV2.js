@@ -10,21 +10,21 @@
 var params = request.httpParameterMap;
 
 /* Script Modules */
-const ISML = require('dw/template/ISML');
-const guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var ISML = require('dw/template/ISML');
+var guard = require('app_storefront_controllers/cartridge/scripts/guard');
 
-const ProductMgr = require('dw/catalog/ProductMgr');
-const ProductSearchModel = require('dw/catalog/ProductSearchModel');
+var ProductMgr = require('dw/catalog/ProductMgr');
+var ProductSearchModel = require('dw/catalog/ProductSearchModel');
 var CatalogMgr = require('dw/catalog/CatalogMgr');
 
-function show(){
-    let product = ProductMgr.getProduct(params.pid.stringValue);
-    let primaryCategory = product.getPrimaryCategory();
-    let psm = new ProductSearchModel();
+function show() {
+    var product = ProductMgr.getProduct(params.pid.stringValue);
+    var primaryCategory = product.getPrimaryCategory();
+    var psm = new ProductSearchModel();
     psm.setCategoryID(primaryCategory.getID());
     psm.setSortingRule(CatalogMgr.getSortingRule("price-low-to-high"));
     psm.search();
-    let searchHits = psm.getProducts();
+    var searchHits = psm.getProducts();
 
     ISML.renderTemplate("productv2", {
         Product: product,
