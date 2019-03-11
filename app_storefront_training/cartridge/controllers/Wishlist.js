@@ -17,6 +17,13 @@ var app = require('app_storefront_controllers/cartridge/scripts/app');
 var guard = require('app_storefront_controllers/cartridge/scripts/guard');
 
 
+function search() {
+    app.getForm('wishlist.search').clear();
+    app.getView({
+        ContinueURL: URLUtils.https('Wishlist-WishListForm')
+    }).render('account/wishlist/wishlistresults');
+}
+
 /**
  * Forms handling for the landing page
  */
@@ -60,6 +67,25 @@ function show() {
     }).render('account/wishlist/wishlist');
 }
 
+/**
+ * Set the shipping address for the wishlist.
+ * Expects AddressID to be already stored in the httpParameterMap.
+ */
+function setShippingAddress() {
+    var address = null;
+    var addressId = request.httpParameterMap.AddressID.stringValue || request.httpParameterMap.editAddress.stringValue;
+
+    if (addressId) {
+        address = dw.customer.AddressBook.getAddress(addressId);
+    }
+
+    var ProductList = app.getModel('ProductList');
+    var productList = ProductList.get();
+    Transaction.wrap(function () {
+        productList.setShippingAddress(address);
+    });
+    response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
+}
 
 /**
  * Forms handler for processing wish lists.
@@ -74,7 +100,7 @@ function wishListForm() {
                 productList.createGiftCertificateItem();
             });
         },
-        deleteItem: function (formgroup, action) {
+        devareItem: function (formgroup, action) {
             productList.removeItem(action.object);
         },
         updateItem: function (formgroup, action) {
@@ -128,7 +154,7 @@ function wishListForm() {
             if (!CSRFProtection.validateRequest()) {
                 if (request.httpParameterMap.format.stringValue === 'ajax') {
                     app.getModel('Customer').logout();
-                    let r = require('~/cartridge/scripts/util/Response');
+                    var r = require('~/cartridge/scripts/util/Response');
                     r.renderJSON({
                         error: Resource.msg('global.csrf.failed.error', 'locale', null)
                     });
@@ -205,21 +231,22 @@ function addProduct() {
 }
 
 /**
- * Sends mail to the 
+ * Sends mail to the wishlist
+ * @returns {void}
  */
-function sendMailForAddingToWishlist(){ 
-    const product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue);
-    const productOptionModel = product.getOptionModel();
-    const subject = Resource.msg("mail.newItemInWishlist", "training", null);
-    const template = new dw.util.Template('mail/mailwishlist.isml');
-    let params = new dw.util.HashMap();
+function sendMailForAddingToWishlist() {
+    var product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue);
+    var productOptionModel = product.getOptionModel();
+    var subject = Resource.msg("mail.newItemInWishlist", "training", null);
+    var template = new dw.util.Template('mail/mailwishlist.isml');
+    var params = new dw.util.HashMap();
     params.put("Product", product);
     params.put("MailSubject", subject);
     params.put("ProductOptionModel", productOptionModel);
-    const text = template.render(params);
+    var text = template.render(params);
 
-    let mail = new dw.net.Mail();
-    const Customer = app.getModel("Customer").get();
+    var mail = new dw.net.Mail();
+    var Customer = app.getModel("Customer").get();
     mail.addTo(Customer.object.profile.email);
     mail.setFrom(dw.system.Site.getCurrent().getPreferences().getCustom()["customerServiceEmail"]);
     mail.setSubject(subject);
@@ -234,33 +261,6 @@ function sendMailForAddingToWishlist(){
 function add() {
     addProduct();
     sendMailForAddingToWishlist();
-    response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
-}
-
-function search () {
-    app.getForm('wishlist.search').clear();
-    app.getView({
-        ContinueURL: URLUtils.https('Wishlist-WishListForm')
-    }).render('account/wishlist/wishlistresults');
-}
-
-/**
- * Set the shipping address for the wishlist.
- * Expects AddressID to be already stored in the httpParameterMap.
- */
-function setShippingAddress() {
-    var address = null;
-    var addressId = request.httpParameterMap.AddressID.stringValue || request.httpParameterMap.editAddress.stringValue;
-
-    if (addressId) {
-        address = dw.customer.AddressBook.getAddress(addressId);
-    }
-
-    var ProductList = app.getModel('ProductList');
-    var productList = ProductList.get();
-    Transaction.wrap(function () {
-        productList.setShippingAddress(address);
-    });
     response.redirect(dw.web.URLUtils.https('Wishlist-Show'));
 }
 
@@ -297,13 +297,13 @@ function replaceProductListItem() {
  */
 // own wishlist
 /** @see module:controllers/Wishlist~Add */
-exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, {scope: 'wishlist'});
+exports.Add = guard.ensure(['get', 'https', 'loggedIn'], add, { scope: 'wishlist' });
 /** @see module:controllers/Wishlist~Show */
-exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, {scope: 'wishlist'});
+exports.Show = guard.ensure(['get', 'https', 'loggedIn'], show, { scope: 'wishlist' });
 /** @see module:controllers/Wishlist~ReplaceProductListItem */
-exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, {scope: 'wishlist'});
+exports.ReplaceProductListItem = guard.ensure(['get', 'https', 'loggedIn'], replaceProductListItem, { scope: 'wishlist' });
 /** @see module:controllers/Wishlist~SetShippingAddress */
-exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, {scope: 'wishlist'});
+exports.SetShippingAddress = guard.ensure(['get', 'https', 'loggedIn'], setShippingAddress, { scope: 'wishlist' });
 
 // others wishlist
 /** @see module:controllers/Wishlist~Search */
@@ -315,4 +315,4 @@ exports.ShowOther = guard.ensure(['get', 'https'], showOther);
 /** @see module:controllers/Wishlist~LandingForm */
 exports.LandingForm = guard.ensure(['post', 'https', 'csrf'], landingForm);
 /** @see module:controllers/Wishlist~WishListForm */
-exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, {scope: 'wishlist'});
+exports.WishListForm = guard.ensure(['post', 'https', 'loggedIn'], wishListForm, { scope: 'wishlist' });
