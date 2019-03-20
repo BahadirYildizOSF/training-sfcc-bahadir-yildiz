@@ -21,14 +21,14 @@ function initializeEvents() {
             }
         });
     })
-    .on('click', '.open-quick-view', function (e) {
-        e.preventDefault();
-        var url = $(this).closest('.product').find('.thumb-link').attr('href');
-        quickview.show({
-            url: url,
-            source: 'quickview'
+        .on('click', '.open-quick-view', function (e) {
+            e.preventDefault();
+            var url = $(this).closest('.product').find('.thumb-link').attr('href');
+            quickview.show({
+                url: url,
+                source: 'quickview'
+            });
         });
-    });
 
     $('#compare-category-list').on('change', function () {
         $(this).closest('form').submit();
