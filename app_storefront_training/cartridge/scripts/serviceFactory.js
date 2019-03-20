@@ -13,6 +13,6 @@ function get(serviceID, serviceCallback) {
         service = dw.svc.LocalServiceRegistry.createService(serviceID, serviceCallback);
     }
     return service;
-};
+}
 
 exports.Get = get;

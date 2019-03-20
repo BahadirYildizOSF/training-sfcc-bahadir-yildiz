@@ -30,27 +30,27 @@ var getJson = function (options) {
         data: options.data || {}
     })
     // success
-    .done(function (response) {
-        if (options.callback) {
-            options.callback(response);
-        }
-    })
+        .done(function (response) {
+            if (options.callback) {
+                options.callback(response);
+            }
+        })
     // failed
-    .fail(function (xhr, textStatus) {
-        if (textStatus === 'parsererror') {
-            window.alert(Resources.BAD_RESPONSE);
-        }
-        if (options.callback) {
-            options.callback(null);
-        }
-    })
+        .fail(function (xhr, textStatus) {
+            if (textStatus === 'parsererror') {
+                window.alert(Resources.BAD_RESPONSE);
+            }
+            if (options.callback) {
+                options.callback(null);
+            }
+        })
     // executed on success or fail
-    .always(function () {
+        .always(function () {
         // remove current request from hash
-        if (currentRequests[options.url]) {
-            delete currentRequests[options.url];
-        }
-    });
+            if (currentRequests[options.url]) {
+                delete currentRequests[options.url];
+            }
+        });
 };
 /**
  * @function
@@ -78,29 +78,29 @@ var load = function (options) {
             withCredentials: true
         }
     })
-    .done(function (response) {
+        .done(function (response) {
         // success
-        if (options.target) {
-            $(options.target).empty().html(response);
-        }
-        if (options.callback) {
-            options.callback(response);
-        }
-    })
-    .fail(function (xhr, textStatus) {
+            if (options.target) {
+                $(options.target).empty().html(response);
+            }
+            if (options.callback) {
+                options.callback(response);
+            }
+        })
+        .fail(function (xhr, textStatus) {
         // failed
-        if (textStatus === 'parsererror') {
-            window.alert(Resources.BAD_RESPONSE);
-        }
-        options.callback(null, textStatus);
-    })
-    .always(function () {
-        progress.hide();
-        // remove current request from hash
-        if (currentRequests[options.url]) {
-            delete currentRequests[options.url];
-        }
-    });
+            if (textStatus === 'parsererror') {
+                window.alert(Resources.BAD_RESPONSE);
+            }
+            options.callback(null, textStatus);
+        })
+        .always(function () {
+            progress.hide();
+            // remove current request from hash
+            if (currentRequests[options.url]) {
+                delete currentRequests[options.url];
+            }
+        });
 };
 
 exports.getJson = getJson;
