@@ -13,10 +13,10 @@ module.exports = {
     },
     redirectURI: URLUtils.https("ShowFacebookInfo-LoggedIn").toString(),
     getLoginDialogLink: function () {
-        return this.links.oauth +"?"+ this.convertToURLParams({
-            client_id: this.AppID, 
-            redirect_uri: encodeURIComponent(this.redirectURI), 
-            state: '"'+ encodeURIComponent(this.state)+ '"'
+        return this.links.oauth + "?" + this.convertToURLParams({
+            client_id: this.AppID,
+            redirect_uri: encodeURIComponent(this.redirectURI),
+            state: '"' + encodeURIComponent(this.state) + '"'
         });
     },
     getAccessTokenLink: function (code) {
@@ -58,7 +58,7 @@ module.exports = {
     },
     convertToURLParams: function (obj) {
         return Object.keys(obj)
-            .map(function (key) { return key + "=" + obj[key] })
+            .map(function (key) { return key + "=" + obj[key]; })
             .join('&');
-    },
-}
+    }
+};

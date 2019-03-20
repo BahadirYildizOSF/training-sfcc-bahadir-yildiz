@@ -11,8 +11,8 @@ function start() {
     });
 }
 
-function loggedIn(){
-    if(params.code && params.code.stringValue){
+function loggedIn() {
+    if (params.code && params.code.stringValue) {
         var accessToken = FacebookHelper.getAccessToken(params.code.stringValue);
         var data = FacebookHelper.getUserInformation(accessToken.access_token);
         ISML.renderTemplate("facebook/showuser", {
