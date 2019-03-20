@@ -2,14 +2,14 @@
 
 /** @module controllers/Newsletter */
 
-const ISML = require('dw/template/ISML');
-const guard = require('app_storefront_controllers/cartridge/scripts/guard');
-const newsletterForm = session.forms.newsletter;
+var ISML = require('dw/template/ISML');
+var guard = require('app_storefront_controllers/cartridge/scripts/guard');
+var newsletterForm = session.forms.newsletter;
 
 function start() {
     newsletterForm.clearFormElement();
     ISML.renderTemplate('newsletter/newslettersubscribe', {
-        ContinueURL : dw.web.URLUtils.https('Newsletter-HandleForm')
+        ContinueURL: dw.web.URLUtils.https('Newsletter-HandleForm')
     });
 }
 
@@ -18,16 +18,16 @@ function start() {
  */
 function handleForm() {
 
-    const Transaction = require('dw/system/Transaction');
-    const submitButton = request.triggeredFormAction;
-    if(submitButton && submitButton.formId === "subscribe"){
+    var Transaction = require('dw/system/Transaction');
+    var submitButton = request.triggeredFormAction;
+    if (submitButton && submitButton.formId === "subscribe") {
         try {
-            Transaction.wrap(function(){
-                const Newsletter = require("~/cartridge/scripts/models/Newsletter");
-                let newsletter = Newsletter.CreateNewsLetterObject(newsletterForm);
+            Transaction.wrap(function () {
+                var Newsletter = require("~/cartridge/scripts/models/Newsletter");
+                var newsletter = Newsletter.CreateNewsLetterObject(newsletterForm);
                 newsletter = Newsletter.AssignCouponCode(newsletter);
                 Newsletter.sendNewsLetterMail(newsletter);
-            })
+            });
             ISML.renderTemplate("newsletter/newslettersuccess.isml");
         } catch (e) {
             ISML.renderTemplate("newsletter/newslettererror.isml", {
@@ -36,7 +36,7 @@ function handleForm() {
         }
     } else {
         ISML.renderTemplate('newsletter/newslettersignup', {
-            ContinueURL : dw.web.URLUtils.https('Newsletter-HandleForm')
+            ContinueURL: dw.web.URLUtils.https('Newsletter-HandleForm')
         });
     }
 }
