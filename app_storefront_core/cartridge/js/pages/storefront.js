@@ -1,6 +1,6 @@
 'use strict';
 
-var addDirectlyToCart = require("../addDirectlyToCard");
+var addDirectlyToCart = require('../addDirectlyToCard');
 
 exports.init = function () {
     $('#homepage-slider')
@@ -58,5 +58,5 @@ exports.init = function () {
             target: '+=1'
         });
     
-    $(document.dwfrm_fastSearch).on("submit", addDirectlyToCart);
+    $(document.dwfrm_fastSearch).on('submit', addDirectlyToCart);
 };

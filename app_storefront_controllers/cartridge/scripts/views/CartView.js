@@ -33,7 +33,7 @@ var CartView = View.extend({
             session.forms.cart.shipments.copyFrom(cart.shipments);
             // Refreshes coupons.
             session.forms.cart.coupons.copyFrom(cart.couponLineItems);
-           // Refreshes the cart calculation.
+            // Refreshes the cart calculation.
             Transaction.wrap(function () {
                 Cart.get(cart).calculate();
             });

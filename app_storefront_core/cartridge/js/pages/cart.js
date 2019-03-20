@@ -18,10 +18,10 @@ function initializeEvents() {
             source: 'cart'
         });
     })
-    .on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
-        e.preventDefault();
-        bonusProductsView.show(this.href);
-    });
+        .on('click', '.bonus-item-actions a, .item-details .bonusproducts a', function (e) {
+            e.preventDefault();
+            bonusProductsView.show(this.href);
+        });
 
     // override enter key for coupon code entry
     $('form input[name$="_couponCode"]').on('keydown', function (e) {
