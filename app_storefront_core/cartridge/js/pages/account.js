@@ -50,35 +50,35 @@ function initializeAddressForm() {
             }
         });
     })
-    .on('click', '.cancel-button, .close-button', function (e) {
-        e.preventDefault();
-        dialog.close();
-    })
-    .on('click', '.delete-button', function (e) {
-        e.preventDefault();
-        if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
-            var url = util.appendParamsToUrl(Urls.deleteAddress, {
-                AddressID: $form.find('#addressid').val(),
-                format: 'ajax'
-            });
-            $.ajax({
-                url: url,
-                method: 'POST',
-                dataType: 'json'
-            }).done(function (data) {
-                if (data.status.toLowerCase() === 'ok') {
-                    dialog.close();
-                    page.refresh();
-                } else if (data.message.length > 0) {
-                    window.alert(data.message);
-                    return false;
-                } else {
-                    dialog.close();
-                    page.refresh();
-                }
-            });
-        }
-    });
+        .on('click', '.cancel-button, .close-button', function (e) {
+            e.preventDefault();
+            dialog.close();
+        })
+        .on('click', '.delete-button', function (e) {
+            e.preventDefault();
+            if (window.confirm(String.format(Resources.CONFIRM_DELETE, Resources.TITLE_ADDRESS))) {
+                var url = util.appendParamsToUrl(Urls.deleteAddress, {
+                    AddressID: $form.find('#addressid').val(),
+                    format: 'ajax'
+                });
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json'
+                }).done(function (data) {
+                    if (data.status.toLowerCase() === 'ok') {
+                        dialog.close();
+                        page.refresh();
+                    } else if (data.message.length > 0) {
+                        window.alert(data.message);
+                        return false;
+                    } else {
+                        dialog.close();
+                        page.refresh();
+                    }
+                });
+            }
+        });
 
     validator.init();
 }
@@ -169,9 +169,9 @@ function initPaymentEvents() {
             url: $(this).attr('action'),
             data: data
         })
-        .done(function () {
-            page.redirect(Urls.paymentsList);
-        });
+            .done(function () {
+                page.redirect(Urls.paymentsList);
+            });
     });
 }
 
