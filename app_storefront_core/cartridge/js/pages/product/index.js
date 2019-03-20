@@ -51,7 +51,7 @@ function initializeEvents() {
             dialog.open({
                 url: Urls.areyouhuman,
                 options: {
-                    closeOnEscape: true,
+                    closeOnEscape: true
                 }
             });
         }

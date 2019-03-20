@@ -409,7 +409,7 @@ function registrationForm() {
 
                 if (orderNo) {
                     var orders = OrderMgr.searchOrders('orderNo={0} AND status!={1}', 'creationDate desc', orderNo,
-                            dw.order.Order.ORDER_STATUS_REPLACED);
+                        dw.order.Order.ORDER_STATUS_REPLACED);
                     if (orders) {
                         var foundOrder = orders.next();
                         Transaction.wrap(function(){
