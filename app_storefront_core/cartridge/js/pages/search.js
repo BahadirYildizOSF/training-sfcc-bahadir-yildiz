@@ -96,7 +96,7 @@ function initializeEvents() {
     // handle toggle refinement blocks
     $main.on('click', '.refinement h3', function () {
         $(this).toggleClass('expanded')
-        .siblings('ul').toggle();
+            .siblings('ul').toggle();
     });
 
     // handle events for updating grid
@@ -138,15 +138,15 @@ function initializeEvents() {
         e.preventDefault();
         updateProductListing($(this).find('option:selected').val());
     })
-    .on('change', '.items-per-page select', function () {
-        var refineUrl = $(this).find('option:selected').val();
-        if (refineUrl === 'INFINITE_SCROLL') {
-            $('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
-        } else {
-            $('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
-            updateProductListing(refineUrl);
-        }
-    });
+        .on('change', '.items-per-page select', function () {
+            var refineUrl = $(this).find('option:selected').val();
+            if (refineUrl === 'INFINITE_SCROLL') {
+                $('html').addClass('infinite-scroll').removeClass('disable-infinite-scroll');
+            } else {
+                $('html').addClass('disable-infinite-scroll').removeClass('infinite-scroll');
+                updateProductListing(refineUrl);
+            }
+        });
 }
 
 exports.init = function () {
