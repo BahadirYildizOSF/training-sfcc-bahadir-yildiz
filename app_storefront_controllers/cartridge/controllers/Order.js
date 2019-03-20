@@ -25,7 +25,7 @@ var guard = require('~/cartridge/scripts/guard');
  */
 function history() {
     var orders = OrderMgr.searchOrders('customerNo={0} AND status!={1}', 'creationDate desc',
-                                        customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
+        customer.profile.customerNo, dw.order.Order.ORDER_STATUS_REPLACED);
 
     var parameterMap = request.httpParameterMap;
     var pageSize = parameterMap.sz.intValue || 5;
