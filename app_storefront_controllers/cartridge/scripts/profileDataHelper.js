@@ -228,7 +228,7 @@ function getWishLists (ProductListMgr) {
                     suite: wishlist.currentShippingAddress.suite,
                     title: wishlist.currentShippingAddress.title
                 }
-            : null,
+                : null,
             description: wishlist.description,
             eventCity: wishlist.eventCity,
             eventCountry: wishlist.eventCountry,

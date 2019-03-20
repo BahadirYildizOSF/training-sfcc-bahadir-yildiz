@@ -18,11 +18,11 @@ exports.init = function init () {
                 currencyMnemonic: currency
             }
         })
-        .done(function (response) {
-            if (!response.success) {
-                throw new Error('Unable to set currency');
-            }
-            window.location.href = url;
-        });
+            .done(function (response) {
+                if (!response.success) {
+                    throw new Error('Unable to set currency');
+                }
+                window.location.href = url;
+            });
     });
 };

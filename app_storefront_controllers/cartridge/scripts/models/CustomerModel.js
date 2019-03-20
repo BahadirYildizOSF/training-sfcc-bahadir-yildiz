@@ -97,7 +97,7 @@ CustomerModel.login = function (username, password, rememberMe) {
     TempCustomer = CustomerMgr.getCustomerByLogin(username);
 
     // @TODO customer locked currently not handled
-    if (typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+    if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
         return false;
     }
 
@@ -106,7 +106,7 @@ CustomerModel.login = function (username, password, rememberMe) {
     });
 
     if (authenticatedCustomer === null) {
-        if (typeof (TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
+        if (typeof(TempCustomer) !== 'undefined' && TempCustomer !== null && TempCustomer.profile !== null && TempCustomer.profile.credentials.locked) {
             Email.get('mail/lockoutemail', TempCustomer.profile.email).setSubject((dw.web.Resource.msg('resource.youraccount', 'email', null))).send({
                 TempCustomer: TempCustomer
             });
