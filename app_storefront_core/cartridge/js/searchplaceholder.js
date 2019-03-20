@@ -12,13 +12,13 @@ function initializeEvents() {
             input.val('');
         }
     })
-    .blur(function () {
-        var input = $(this);
-        if (input.val() === '' || input.val() === input.attr('placeholder')) {
-            input.val(input.attr('placeholder'));
-        }
-    })
-    .blur();
+        .blur(function () {
+            var input = $(this);
+            if (input.val() === '' || input.val() === input.attr('placeholder')) {
+                input.val(input.attr('placeholder'));
+            }
+        })
+        .blur();
 }
 
 exports.init = initializeEvents;
