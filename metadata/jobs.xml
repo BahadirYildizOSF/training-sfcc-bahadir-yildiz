@@ -1,2 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01"/>
+<jobs xmlns="http://www.demandware.com/xml/impex/jobs/2015-07-01">    
+    <job job-id="CategoryAssigner" priority="0">
+        <description/>
+        <parameters/>
+        <flow>
+            <context site-id="SiteGenesis"/>
+            <step step-id="exportCategoryAssignment" type="ExecuteScriptModule" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="ExecuteScriptModule.Module">app_storefront_training/cartridge/scripts/job/CategoryAssigner.js</parameter>
+                    <parameter name="ExecuteScriptModule.FunctionName">execute</parameter>
+                    <parameter name="ExecuteScriptModule.Transactional">true</parameter>
+                    <parameter name="brand">Pencil</parameter>
+                    <parameter name="newCategory">training-category</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <flow>
+            <context site-id="Sites"/>
+            <step step-id="ImportCategoryAssignment" type="ImportCatalog" enforce-restart="false">
+                <description/>
+                <parameters>
+                    <parameter name="FileNamePattern">assigned_products.xml</parameter>
+                    <parameter name="NoFilesFoundHandling">ERROR</parameter>
+                    <parameter name="ImportFailedHandling">ERROR</parameter>
+                    <parameter name="AfterImportFileHandling">Keep</parameter>
+                    <parameter name="ArchiveFolder">archive</parameter>
+                    <parameter name="ImportMode">Merge</parameter>
+                </parameters>
+            </step>
+        </flow>
+        <rules/>
+        <triggers>
+            <run-once enabled="false">
+                <date>2019-03-16Z</date>
+                <time>04:00:00.000Z</time>
+            </run-once>
+        </triggers>
+    </job>
+</jobs>
