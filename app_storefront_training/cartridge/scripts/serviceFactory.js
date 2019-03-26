@@ -7,7 +7,7 @@
  * @returns
  */
 function get(serviceID, serviceCallback) {
-	var service;
+    var service;
     //If the service was not configured and callback was sent
     if (serviceCallback) {
         service = dw.svc.LocalServiceRegistry.createService(serviceID, serviceCallback);
@@ -15,4 +15,30 @@ function get(serviceID, serviceCallback) {
     return service;
 }
 
-exports.Get = get;
+function initializeFlickrService() {
+    return get("flickr.http.get", {
+        createRequest: function (svc, params) {
+            svc.setRequestMethod("GET");
+            for (var name in params) {
+                svc.addParam(name, params[name]);
+            }
+        },
+        parseResponse: function (svc, client) {
+            return JSON.parse(client.text);
+        },
+        mockCall: function () {
+            return {
+                items: [
+                    { title: "Mock Object 1", media: { m: "https://via.placeholder.com/150" } },
+                    { title: "Mock Object 2", media: { m: "https://via.placeholder.com/150" } },
+                    { title: "Mock Object 3", media: { m: "https://via.placeholder.com/150" } }
+                ]
+            };
+        },
+        filterLogMessage: function (msg) {
+            return msg.replace("headers", "OFFWITHTHEHEADERS");
+        }
+    });
+}
+
+exports.initializeFlickrService = initializeFlickrService;
