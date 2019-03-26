@@ -1386,9 +1386,6 @@
             <attribute-definition attribute-id="customerEmail">
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="customerLocaleID">
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="customerName">
                 <min-length>0</min-length>
             </attribute-definition>
@@ -4613,20 +4610,6 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <default-value>true</default-value>
             </attribute-definition>
-            <attribute-definition attribute-id="facebookAPISecret">
-                <display-name xml:lang="x-default">Facebook API Secret</display-name>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
-            <attribute-definition attribute-id="facebookAppID">
-                <display-name xml:lang="x-default">Facebook App ID</display-name>
-                <type>string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="flickrLanguage">
                 <display-name xml:lang="x-default">Flickr Language</display-name>
                 <type>enum-of-string</type>
@@ -4869,11 +4852,6 @@
                 <attribute attribute-id="customerServiceEmail"/>
                 <attribute attribute-id="rateLimiterThreshold"/>
                 <attribute attribute-id="checkTLS"/>
-            </attribute-group>
-            <attribute-group group-id="facebookSettings">
-                <display-name xml:lang="x-default">Facebook Settings</display-name>
-                <attribute attribute-id="facebookAppID"/>
-                <attribute attribute-id="facebookAPISecret"/>
             </attribute-group>
             <attribute-group group-id="flickrSettings">
                 <display-name xml:lang="x-default">Flickr Settings</display-name>

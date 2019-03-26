@@ -3,11 +3,10 @@
     <standard-preferences>
         <all-instances>
             <preference preference-id="ActiveLocales">de:it_IT:fr_CA:en:it:fr:fr_FR:ja_JP:es:zh:de_DE:default:en_GB:en_CA:en_US:ja:zh_CN:nl</preference>
-            <preference preference-id="CustomCartridges">app_storefront_training:bm_custom_plugin</preference>
+            <preference preference-id="CustomCartridges">bm_custom_plugin</preference>
             <preference preference-id="CustomImpexFolders"/>
             <preference preference-id="CustomProductListColumns">null:null:null:null:null</preference>
             <preference preference-id="DefaultRolesBMUser"/>
-            <preference preference-id="EnableSalesforceIPAddressWhitelist">false</preference>
             <preference preference-id="IPAddressBlacklist"/>
             <preference preference-id="IPAddressDenyAccess">false</preference>
             <preference preference-id="IPAddressIncreaseFailureCount">false</preference>
