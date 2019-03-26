@@ -60,11 +60,11 @@ function initializeEvents() {
         if (addressID.length === 0) { return; }
         populateForm(addressID, $beforeAddress);
     })
-    .on('change', 'select[name$="_addressAfterList"]', function () {
-        var addressID = $(this).val();
-        if (addressID.length === 0) { return; }
-        populateForm(addressID, $afterAddress);
-    });
+        .on('change', 'select[name$="_addressAfterList"]', function () {
+            var addressID = $(this).val();
+            if (addressID.length === 0) { return; }
+            populateForm(addressID, $afterAddress);
+        });
 
     $('.item-list').on('click', '.item-edit-details a', function (e) {
         e.preventDefault();
