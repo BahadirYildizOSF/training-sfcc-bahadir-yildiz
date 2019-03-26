@@ -19,7 +19,7 @@ var ProductMgr = require('dw/catalog/ProductMgr');
 var ProductModel = AbstractModel.extend(
     /** @lends module:models/ProductModel~ProductModel.prototype */
     {
-         /**
+        /**
          * Processes variation value selections and calculates and returns the ProductVariationModels
          * for one or multiple products. The function uses the given HttpParameterMap, so the request parameters do not
          * need to be passed in. Variation value selections must be specified as HTTP parameters in the following form:
