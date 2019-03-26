@@ -1,5 +1,5 @@
 var HTTPClient = require('dw/net/HTTPClient');
-var preferences = dw.system.Site.getCurrent().getPreferences();
+var preferences = require('dw/system/Site').getCurrent().getPreferences();
 var URLUtils = require('dw/web/URLUtils');
 
 module.exports = {
