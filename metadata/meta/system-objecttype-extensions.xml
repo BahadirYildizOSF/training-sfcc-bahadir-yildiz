@@ -1386,9 +1386,6 @@
             <attribute-definition attribute-id="customerEmail">
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="customerLocaleID">
-                <min-length>0</min-length>
-            </attribute-definition>
             <attribute-definition attribute-id="customerName">
                 <min-length>0</min-length>
             </attribute-definition>
@@ -4620,46 +4617,6 @@
                 <externally-managed-flag>false</externally-managed-flag>
                 <min-length>0</min-length>
             </attribute-definition>
-            <attribute-definition attribute-id="flickrLanguage">
-                <display-name xml:lang="x-default">Flickr Language</display-name>
-                <type>enum-of-string</type>
-                <mandatory-flag>false</mandatory-flag>
-                <externally-managed-flag>false</externally-managed-flag>
-                <value-definitions>
-                    <value-definition default="true">
-                        <display xml:lang="x-default">English (U.S.)</display>
-                        <value>en-us</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">German</display>
-                        <value>de-de</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">Spanish</display>
-                        <value>es-us</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">French</display>
-                        <value>fr-fr</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">Itailian</display>
-                        <value>it-it</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">Korean</display>
-                        <value>ko-kr</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">Portuguese (Brazilian)</display>
-                        <value>pt-br</value>
-                    </value-definition>
-                    <value-definition>
-                        <display xml:lang="x-default">Traditional Chinese (Hong Kong)</display>
-                        <value>zh-hk</value>
-                    </value-definition>
-                </value-definitions>
-            </attribute-definition>
             <attribute-definition attribute-id="listPriceDefault">
                 <display-name xml:lang="x-default">Default List Price Book ID</display-name>
                 <type>string</type>
@@ -4866,10 +4823,6 @@
             <attribute-group group-id="facebookSettings">
                 <display-name xml:lang="x-default">Facebook Settings</display-name>
                 <attribute attribute-id="facebookAPISecret"/>
-            </attribute-group>
-            <attribute-group group-id="flickrSettings">
-                <display-name xml:lang="x-default">Flickr Settings</display-name>
-                <attribute attribute-id="flickrLanguage"/>
             </attribute-group>
         </group-definitions>
     </type-extension>
