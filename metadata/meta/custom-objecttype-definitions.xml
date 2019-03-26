@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <custom-type type-id="NewsletterSubscription">
+        <display-name xml:lang="x-default">Newsletter Subscription</display-name>
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="email">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="firstname">
+                <display-name xml:lang="x-default">First Name</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="lastname">
+                <display-name xml:lang="x-default">Last Name</display-name>
+                <type>string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="NewsletterSubscription">
+                <display-name xml:lang="x-default">Newsletter Subscription</display-name>
+                <attribute attribute-id="firstname"/>
+                <attribute attribute-id="lastname"/>
+                <attribute attribute-id="creationDate" system="true"/>
+                <attribute attribute-id="email"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+    <custom-type type-id="mainpage-slider">
+        <staging-mode>no-staging</staging-mode>
+        <storage-scope>site</storage-scope>
+        <key-definition attribute-id="Mainpage Slider">
+            <type>string</type>
+            <min-length>0</min-length>
+        </key-definition>
+        <attribute-definitions>
+            <attribute-definition attribute-id="when-to-show">
+                <display-name xml:lang="x-default">When to ShoW</display-name>
+                <type>date</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+            <attribute-definition attribute-id="which-to-show">
+                <display-name xml:lang="x-default">Which To Show</display-name>
+                <type>set-of-string</type>
+                <localizable-flag>false</localizable-flag>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+            </attribute-definition>
+        </attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="custom-attribute-group">
+                <display-name xml:lang="x-default">Custom Attribute Group</display-name>
+                <attribute attribute-id="Mainpage Slider"/>
+                <attribute attribute-id="which-to-show"/>
+                <attribute attribute-id="when-to-show"/>
+            </attribute-group>
+        </group-definitions>
+    </custom-type>
+
+</metadata>
