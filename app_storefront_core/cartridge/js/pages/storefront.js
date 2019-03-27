@@ -58,5 +58,5 @@ exports.init = function () {
             target: '+=1'
         });
     
-    $(document.dwfrm_fastSearch).on('submit', addDirectlyToCart);
+    $('form[name$=fastSearch]').on('submit', addDirectlyToCart);
 };

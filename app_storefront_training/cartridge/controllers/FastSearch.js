@@ -5,7 +5,7 @@ var r = require('app_storefront_controllers/cartridge/scripts/util/Response');
 var ProductMgr = require('dw/catalog/ProductMgr');
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
-var params = request.httpParameterMap;
+var Logger = require('dw/system/Logger');
 
 function start() {
     var fastSearchForm = session.forms.fastSearch;
@@ -17,25 +17,57 @@ function start() {
 
 function HandleForm() {
     var ProductModel = app.getModel('Product');
-    var result = {};
+    var params = request.httpParameterMap;
+    var result = false;
     try {
         var product = ProductMgr.getProduct(params.pid.stringValue);
+
         if (product === null) {
-            throw new Error(JSON.stringify({ status: "PRODUCT_NOT_FOUND", statusText: Resource.msgf("product.notFound", "training", null, params.pid.stringValue) }));
-        } else if (product.master) {
-            throw new Error(JSON.stringify({ status: "PRODUCT_IS_MASTER", statusText: Resource.msgf("product.isMaster", "training", null, product.getName()) }));
+            result = {
+                status: "PRODUCT_NOT_FOUND",
+                statusText: Resource.msgf("product.notFound", "training", null, params.pid.stringValue)
+            };
+        } else {
+
+            if (product.master) {
+                result = {
+                    status: "PRODUCT_IS_MASTER",
+                    statusText: Resource.msgf("product.isMaster", "training", null, product.getName())
+                };
+            }
+            var availability = ProductModel.get(product).getAvailability(1);
+
+            if (!availability.inStock && !result) {
+                result = {
+                    status: "PRODUCT_NOT_IN_STOCK",
+                    statusText: Resource.msgf("product.notInStock", "training", null, product.getName())
+                };
+            }
+
+            if (!result) {
+                var Cart = app.getModel('Cart');
+                var cartStatus = Cart.goc().addProductToCart();
+
+                if (!cartStatus) {
+                    result = {
+                        status: "PRODUCT_NOT_ADDED_TO_CART",
+                        statusText: Resource.msgf("product.notAddedToCart", "training", null, product.getName())
+                    };
+                }
+            }
         }
-        var availability = ProductModel.get(product).getAvailability(1);
-        if (!availability.inStock) {
-            throw new Error(JSON.stringify({ status: "PRODUCT_NOT_IN_STOCK", statusText: Resource.msgf("product.notInStock", "training", null, product.getName()) }));
-        }
-        app.getModel('Cart').goc().addProductToCart();
-        result.status = "ADDED_TO_CART";
-        result.redirectTo = URLUtils.url("Cart-Show").toString();
-    } catch (error) {
-        result = JSON.parse(error.message);
-    } finally {
-        r.renderJSON(result);
+
+        r.renderJSON(result || {
+            status: "PRODUCT_ADDED_TO_CART",
+            redirectTo: URLUtils.url("Cart-Show").toString()
+        });
+    } catch (e) {
+        Logger.error(e.message);
+
+        r.renderJSON({
+            status: "PRODUCT_NOT_ADDED_TO_CART",
+            statusText: Resource.msgf("product.notAddedToCart", "training", null, product.getName())
+        });
     }
 }
 

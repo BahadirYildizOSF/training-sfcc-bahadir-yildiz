@@ -124,7 +124,8 @@ ResourceHelper.getResources = function(pageContext) {
         VALIDATE_RANGELENGTH              : Resource.msg('validate.rangelength', 'forms', null),
         VALIDATE_RANGE                    : Resource.msg('validate.range', 'forms', null),
         VALIDATE_MAX                      : Resource.msg('validate.max', 'forms', null),
-        VALIDATE_MIN                      : Resource.msg('validate.min', 'forms', null)
+        VALIDATE_MIN                      : Resource.msg('validate.min', 'forms', null),
+        VALIDATE_FASTSEARCH_INPUT_EMPTY   : Resource.msg('forms.fastSearch.productID.empty', 'forms', null)
     };
 
     // additional resources
