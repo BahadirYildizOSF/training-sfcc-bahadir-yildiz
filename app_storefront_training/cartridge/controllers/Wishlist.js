@@ -11,6 +11,10 @@ var GiftCertProductListItem = require('dw/customer/ProductListItem').TYPE_GIFT_C
 var Transaction = require('dw/system/Transaction');
 var Resource = require('dw/web/Resource');
 var URLUtils = require('dw/web/URLUtils');
+var Template = require('dw/util/Template');
+var HashMap = require('dw/util/HashMap');
+var Mail = require('dw/net/Mail');
+var Site = require('dw/system/Site');
 
 /* Script Modules */
 var app = require('app_storefront_controllers/cartridge/scripts/app');
@@ -238,17 +242,17 @@ function sendMailForAddingToWishlist() {
     var product = app.getModel('Product').get(request.httpParameterMap.pid.stringValue);
     var productOptionModel = product.getOptionModel();
     var subject = Resource.msg("mail.newItemInWishlist", "training", null);
-    var template = new dw.util.Template('mail/mailwishlist.isml');
-    var params = new dw.util.HashMap();
+    var template = new Template('mail/mailwishlist.isml');
+    var params = new HashMap();
     params.put("Product", product);
     params.put("MailSubject", subject);
     params.put("ProductOptionModel", productOptionModel);
     var text = template.render(params);
 
-    var mail = new dw.net.Mail();
+    var mail = new Mail();
     var Customer = app.getModel("Customer").get();
     mail.addTo(Customer.object.profile.email);
-    mail.setFrom(dw.system.Site.getCurrent().getPreferences().getCustom()["customerServiceEmail"]);
+    mail.setFrom(Site.getCurrent().getPreferences().getCustom()["customerServiceEmail"]);
     mail.setSubject(subject);
     mail.setContent(text);
     mail.send();
