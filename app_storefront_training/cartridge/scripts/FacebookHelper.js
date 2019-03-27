@@ -45,6 +45,7 @@ module.exports = {
         client.setRequestHeader('Content-Type', 'application/json');
         client.setTimeout(3000);
         client.send();
+
         if (client.statusCode === 200) {
             var data = JSON.parse(client.text);
             return data;
