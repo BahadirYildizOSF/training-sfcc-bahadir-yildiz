@@ -27,8 +27,10 @@ var addDirectlyToCard = function (event) {
             type: 'GET',
             crossDomain: true,
             complete: function (data) {
+                
                 if (data.readyState == '4' && data.status == '200') {
                     var response = data.responseJSON;
+
                     if (response.status === 'PRODUCT_ADDED_TO_CART') {
                         window.location.href = response.redirectTo;
                     } else if (['PRODUCT_NOT_FOUND', 'PRODUCT_IS_MASTER', 'PRODUCT_NOT_IN_STOCK', 'PRODUCT_NOT_ADDED_TO_CART'].includes(response.status)) {
